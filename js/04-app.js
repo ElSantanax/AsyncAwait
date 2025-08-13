@@ -1,25 +1,28 @@
-function descargarCliente() {
-    return new Promise((resolve, reject) => {
-
-        const error = false;
-
+function descargarNuevosClientes() {
+    return new Promise((resolve) => {
+        console.log('Descargando clientes...');
         setTimeout(() => {
-            if (!error) {
-                resolve('El listado de clientes se cargo correctamente');
-            } else {
-                reject('Error en la conexión');
-            }
-        }, 3000);
-    })
+            resolve('Los clientes fueron descargados');
+        }, 5000);
+    });
 }
 
-const ejecutar = async () => {
+function descargarNuevosPedidos() {
+    return new Promise((resolve) => {
+        console.log('Descargando pedidos...');
+        setTimeout(() => {
+            resolve('Los pedidos fueron descargados');
+        }, 3000);
+    });
+}
+
+const app = async () => {
     try {
-        const respuesta = await descargarCliente();
+        const respuesta = await Promise.all([descargarNuevosClientes(), descargarNuevosPedidos()])
         console.log(respuesta);
     } catch (error) {
         console.log(error);
     }
 }
 
-ejecutar();
+app();
